@@ -12,7 +12,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://student-productivity-manager-jet.vercel.app/",
+      "https://student-productivity-manager-jet.vercel.app",
     ],
     credentials: true,
   })
