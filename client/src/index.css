@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root Theme */
+:root {
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  background-color: #0f172a;
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #1e293b, #111827);
+  color: white;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#7c3aed, #06b6d4);
+  border-radius: 10px;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+}
+
+/* Premium Container */
+.container-premium {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(to right, #7c3aed, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Premium Button */
+.btn-premium {
+  background: linear-gradient(to right, #7c3aed, #06b6d4);
+  padding: 12px 24px;
+  border-radius: 14px;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+}
