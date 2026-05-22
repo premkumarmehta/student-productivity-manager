@@ -15,27 +15,44 @@ function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const [loading, setLoading] =
+  useState(false);
+
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const { data } = await API.post("/auth/login", {
-        email,
-        password,
-      });
+  try {
+    setLoading(true);
 
-      login(data); // store user + token
+    const { data } =
+      await API.post(
+        "/auth/login",
+        {
+          email,
+          password,
+        }
+      );
 
-      toast.success(`Welcome back, ${data.name}!`);
+    login(data);
 
-      navigate("/dashboard");
+    toast.success(
+      `Welcome back, ${data.name}!`
+    );
 
-    } catch (error) {
-toast.error(
-  error.response?.data?.message ||
-    "Login failed"
-);    }
-  };
+    navigate("/dashboard");
+
+  } catch (error) {
+
+    toast.error(
+      error.response?.data
+        ?.message ||
+        "Login failed"
+    );
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-slate-950">
@@ -95,9 +112,25 @@ toast.error(
           </div>
 
           {/* Button */}
-          <button type="submit" className="w-full btn-premium py-3 rounded-xl">
-            Login
-          </button>
+        <button
+  type="submit"
+  disabled={loading}
+  className={`w-full py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2 ${
+    loading
+      ? "bg-cyan-700 cursor-not-allowed"
+      : "bg-cyan-500 hover:bg-cyan-400 text-black"
+  }`}
+>
+  {loading ? (
+    <>
+      <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+
+      Processing...
+    </>
+  ) : (
+    "Login"
+  )}
+</button>
         </form>
 
         {/* Footer */}

@@ -18,27 +18,40 @@ function Register() {
   const [showPass, setShowPass] = useState(false);
 const navigate = useNavigate();
 
+const [loading, setLoading] =
+  useState(false);
+
 const handleRegister = async (e) => {
   e.preventDefault();
 
   try {
-    await API.post("/auth/register", {
-      name,
-      email,
-      password,
-    });
+    setLoading(true);
 
-  toast.success(
-  "Registration successful!"
-);
+    await API.post(
+      "/auth/register",
+      {
+        name,
+        email,
+        password,
+      }
+    );
 
-navigate("/login");
+    toast.success(
+      "Registration successful!"
+    );
+
+    navigate("/login");
 
   } catch (error) {
-   toast.error(
-  error.response?.data?.message ||
-    "Register failed"
-);
+
+    toast.error(
+      error.response?.data
+        ?.message ||
+        "Register failed"
+    );
+
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -122,11 +135,24 @@ navigate("/login");
 
           {/* Button */}
           <button
-            type="submit"
-            className="w-full btn-premium py-3 rounded-xl"
-          >
-            Create Account
-          </button>
+  type="submit"
+  disabled={loading}
+  className={`w-full py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2 ${
+    loading
+      ? "bg-cyan-700 cursor-not-allowed"
+      : "bg-cyan-500 hover:bg-cyan-400 text-black"
+  }`}
+>
+  {loading ? (
+    <>
+      <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+
+      Processing...
+    </>
+  ) : (
+    "Register"
+  )}
+</button>
         </form>
 
         {/* Footer */}
