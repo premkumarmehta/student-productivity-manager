@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import API from "../api/api";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 function Register() {
   const [name, setName] = useState("");
@@ -54,6 +55,19 @@ const handleRegister = async (e) => {
     setLoading(false);
   }
 };
+
+useEffect(() => {
+  const token =
+    localStorage.getItem(
+      "token"
+    );
+
+  if (token) {
+    navigate(
+      "/dashboard"
+    );
+  }
+}, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-slate-950">

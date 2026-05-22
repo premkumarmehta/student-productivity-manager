@@ -6,6 +6,7 @@ import API from "../api/api";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -53,6 +54,19 @@ function Login() {
     setLoading(false);
   }
 };
+
+useEffect(() => {
+  const token =
+    localStorage.getItem(
+      "token"
+    );
+
+  if (token) {
+    navigate(
+      "/dashboard"
+    );
+  }
+}, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-slate-950">
