@@ -9,6 +9,8 @@ import {
 import { useAuth } from "../context/AuthContext";
 import TaskManager from "../components/tasks/TaskManager";
 import toast from "react-hot-toast";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Home from "./Home";
 
 function Dashboard() {
   const { user, logout } = useAuth();
@@ -24,18 +26,24 @@ function Dashboard() {
   const greeting =
     hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
 
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-slate-950 text-white p-6">
       {/* Header */}
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold gradient-text">Student Dashboard</h1>
+       
+        <div className="flex items-center gap-2 px-4 py-2">
+          <button onClick={() => navigate("/")} className="px-6 text-white hover:text-cyan-400 transition duration-300 font-medium">Home</button>
 
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 px-4 py-2 bg-red-500/20 rounded-xl"
-        >
-          <FaSignOutAlt /> Logout
-        </button>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-4 py-2 bg-red-500/20 rounded-xl"
+          >
+            <FaSignOutAlt /> Logout
+          </button>
+        </div>
       </div>
 
       {/* User Card */}
@@ -75,7 +83,6 @@ function Dashboard() {
           <p className="text-gray-400">Manage your account</p>
         </div>
       </div>
-
 
       {/* Task Manager */}
       <TaskManager />
